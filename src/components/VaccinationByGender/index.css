@@ -1,0 +1,11 @@
+.vaccination-gender-chart-container {
+  background-color: #1c1c2b;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.vaccination-gender-chart-title {
+  color: #94a3b8;
+  font-family: 'Roboto';
+  font-size: 23px;
+}

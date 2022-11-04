@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import VaccinationCoverage from '../VaccinationCoverage'
 import VaccinationByGender from '../VaccinationByGender'
+import VaccinationByAge from '../VaccinationByAge'
 import './index.css'
 
 const apiStatusConstant = {
@@ -12,7 +13,7 @@ const apiStatusConstant = {
 }
 
 class CowinDashboard extends Component {
-  state = {apiStatus: apiStatusConstant.failure, vaccineData: []}
+  state = {apiStatus: apiStatusConstant.initial, vaccineData: {}}
 
   componentDidMount() {
     this.getVaccineData()
@@ -20,10 +21,12 @@ class CowinDashboard extends Component {
 
   getVaccineData = async () => {
     this.setState({apiStatus: apiStatusConstant.inProgress})
-    const url = 'https://apis.ccbp.in/covid-vaccination-data'
-    const response = await fetch(url)
-    const data = await response.json()
+    const covidVaccinationDataApiUrl =
+      'https://apis.ccbp.in/covid-vaccination-data'
+    const response = await fetch(covidVaccinationDataApiUrl)
+
     if (response.ok === true) {
+      const data = await response.json()
       this.setState({vaccineData: data, apiStatus: apiStatusConstant.success})
     } else {
       this.setState({apiStatus: apiStatusConstant.failure})
@@ -36,8 +39,8 @@ class CowinDashboard extends Component {
     return (
       <>
         <VaccinationCoverage vaccineData={vaccineData} />
-
         <VaccinationByGender vaccineData={vaccineData} />
+        <VaccinationByAge vaccineData={vaccineData} />
       </>
     )
   }
@@ -86,7 +89,7 @@ class CowinDashboard extends Component {
             <h1 className="logo-heading">co-WIN</h1>
           </div>
           <h1 className="sub-heading">CoWIN Vaccination in India</h1>
-          {this.renderView()}
+          <div>{this.renderView()}</div>
         </div>
       </div>
     )

@@ -6,12 +6,12 @@ const VaccinationByGender = props => {
   const data = vaccineData.vaccination_by_gender
   console.log(data)
   return (
-    <div>
-      <h1>Vaccination by gender</h1>
+    <div className="vaccination-gender-chart-container">
+      <h1 className="vaccination-gender-chart-title">Vaccination by gender</h1>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie
-            cx="70%"
+            cx="50%"
             cy="40%"
             data={data}
             startAngle={0}
@@ -27,8 +27,8 @@ const VaccinationByGender = props => {
           <Legend
             iconType="circle"
             layout="horizontal"
-            verticalAlign="middle"
-            align="right"
+            verticalAlign="bottom"
+            align="center"
           />
         </PieChart>
       </ResponsiveContainer>
